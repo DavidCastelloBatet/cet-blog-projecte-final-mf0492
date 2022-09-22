@@ -1,3 +1,11 @@
+<?php include './config/config.php' ?>
+<?php include './config/Basemysql.php' ?>
+<?php include './helpers/format_helper.php' ?>
+<?php include './models/Article_model.php' ?>
+<?php include './models/Comentari_model.php' ?>
+<?php include './models/Usuari_model.php' ?>
+
+
 <!doctype html>
 <html lang="ca">
 
@@ -23,7 +31,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand logo" href="index.php">CET Blog</a>
+      <a class="navbar-brand logo" href="<?= RUTA_FRONT; ?>">CET Blog</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -35,32 +43,32 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li>
-                <a class="dropdown-item" href="admin/articles.php">Articles</a>
+                <a class="dropdown-item" href="<?= RUTA_ADMIN; ?>articles.php">Articles</a>
               </li>
               <li>
-                <a class="dropdown-item" href="admin/comentaris.php">Comentaris</a>
+                <a class="dropdown-item" href="<?= RUTA_ADMIN; ?>comentaris.php">Comentaris</a>
               </li>
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="admin/usuaris.php">Usuaris</a>
+            <a class="nav-link" href="<?= RUTA_ADMIN; ?>usuaris.php">Usuaris</a>
           </li>
         </ul>
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="index.php">Inici</a>
+            <a class="nav-link" href="<?= RUTA_FRONT; ?>">Inici</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="registre.php">Registrar-se</a>
+            <a class="nav-link" href="<?= RUTA_FRONT; ?>registre.php">Registrar-se</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="accedir.php">Accedir</a>
+            <a class="nav-link" href="<?= RUTA_FRONT; ?>accedir.php">Accedir</a>
           </li>
           <li class="nav-item">
             <p class="text-white mt-2"><i class="bi bi-person-circle"></i> </p>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="sortir.php">Sortir</a>
+            <a class="nav-link" href="<?= RUTA_FRONT; ?>sortir.php">Sortir</a>
           </li>
         </ul>
       </div>
