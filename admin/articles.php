@@ -1,5 +1,17 @@
 <?php include("../includes/header.php") ?>
 
+<?php
+
+// instancio la base de dades i la conexio
+$baseDades = new Basemysql();
+$db = $baseDades->connect();
+
+// instancio l'objecte Article_model
+$articles = new Article_model($db);
+$resultat = $articles->leer();
+
+?>
+
 
 <div class="row">
     <div class="col-sm-6">
@@ -24,18 +36,20 @@
             </thead>
             <tbody>
 
-                <tr>
-                    <td>1</td>
-                    <td>test</td>
-                    <td>
-                        <img class="img/articulos/" style="width:180px;">
-                    </td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>
-                        <a href="editar_articles.php" class="btn btn-warning"><i class="bi bi-pencil-fill"> Editar / Esborrar</i></a>
-                    </td>
-                </tr>
+                <?php foreach ($resultat as $article) : ?>
+                    <tr>
+                        <td><?= $article->id ?></td>
+                        <td><?= $article->titulo ?></td>
+                        <td>
+                            <img class="img-fluid" src="<?= RUTA_FRONT . 'img/articulos/' . $article->imagen; ?>" style="width:180px;">
+                        </td>
+                        <td><?= $article->texto ?></td>
+                        <td><?= $article->fecha_creacion ?></td>
+                        <td>
+                            <a href="editar_articles.php?id=<?= $article->id; ?>" class="btn btn-warning"><i class="bi bi-pencil-fill"> Editar / Esborrar</i></a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
 
             </tbody>
         </table>
