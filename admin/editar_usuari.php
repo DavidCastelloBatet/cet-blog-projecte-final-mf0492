@@ -5,19 +5,59 @@
 $baseDades = new Basemysql();
 $db = $baseDades->connect();
 
-// valido la recepcio de l'id que arriva d'articles.php
+// valido la recepcio de l'id que arriva d'usuaris.php
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 }
 
-// instancio l'objecte Article_model
+// instancio l'objecte Usuari_model
 $usuari = new Usuari_model($db);
 
 // crido el metode de l'objecte i li paso la id de l'article rebuda per GET
 $resultat = $usuari->llegir_individual($id);
 
+// ACTUALITZACIO DEL ROL
+if (isset($_POST['editarUsuario'])) {
+    // Obtenim els valors del formulari
+    // aquest id l'obtenim del name de l'input hidden que tenim al formulari
+    $idUsuari = $_POST['id'];
+    // el rol l'obtenim del formulari
+    $rol = $_POST['rol'];
+
+    // Validem que els caps tinguin un valor
+    if (empty($idUsuari) || $idUsuari == '' || empty($rol) || $rol == '') {
+        $error = "Error, hi han camps del formulari sense valor";
+    } else {
+        // editem l'usuari
+        if ($usuari->actualizar($idUsuari, $rol)) {
+            $missatge = "Usuari actualitzat correctament";
+            header("Location:usuaris.php?missatge=" . urlencode($missatge));
+            exit();
+        } else {
+            $error = "No s'ha pogut actualitzar";
+        }
+    }
+}
+
+// ESBORRAR USUARI
+if (isset($_POST['borrarUsuario'])) {
+    // instancio l'objecte article
+    $usuari = new Usuari_model($db);
+    // recullo el valor de l'id que ve del input ocult del formulari
+    $idUsuari = $_POST['id'];
+
+    // creem el nou article i redireccionem
+    if ($usuari->esborrar($idUsuari)) {
+        $missatge = "Usuari esborrat correctament";
+        header("Location:usuaris.php?missatge=" . urlencode($missatge));
+    } else {
+        $error = "Error, no s'ha pogut esborrar";
+    }
+}
+
 
 ?>
+
 
 <div class="row">
     <div class="col-sm-6">

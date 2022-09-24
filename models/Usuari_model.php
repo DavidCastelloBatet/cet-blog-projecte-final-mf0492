@@ -108,51 +108,31 @@ class Usuari_model
 
 
 
-  // metode per EDITAR UN ARTICLE 
-  public function actualizar($id, $titulo, $newImageName, $texto)
+  // metode per EDITAR UN USUARI 
+  public function actualizar($idUsuari, $rol)
   {
-    if ($newImageName == "") {
-      // Escenari si no es vol modificar la imatge
-      // creo la consulta
-      $query = "UPDATE  $this->table SET titulo = :titulo, texto = :texto WHERE id = :id";
-      // preparo la sentencia
-      $stmt = $this->conn->prepare($query);
+    // creo la consulta
+    $query = "UPDATE  $this->table SET rol_id = :rol_id  WHERE id = :id";
 
-      // vincular paràmetres per nom
-      // al parametre li vinculem el parametre rebut i li diem que l'id sera de tipus int
-      // i la resta de camps seran de tipus string
-      $stmt->bindParam(":id", $id, PDO::PARAM_INT);
-      $stmt->bindParam(":titulo", $titulo, PDO::PARAM_STR);
-      $stmt->bindParam(":texto", $texto, PDO::PARAM_STR);
+    // preparo la sentencia
+    $stmt = $this->conn->prepare($query);
 
-      // executo la query
-      if ($stmt->execute()) {
-        return true;
-      }
-    } else {
-      // Escenari  en el que SI es vol modificar la imatge
-      // creo la consulta
-      $query = "UPDATE  $this->table SET titulo = :titulo, imagen = :imagen, texto = :texto WHERE id = :id";
-      // preparo la sentencia
-      $stmt = $this->conn->prepare($query);
+    // vincular paràmetres per nom
+    // al parametre li vinculem el parametre rebut i li diem que l'id de l'usuari
+    // i el la id del rol sera de tipus int
+    $stmt->bindParam(":rol_id", $rol, PDO::PARAM_INT);
+    $stmt->bindParam(":id", $idUsuari, PDO::PARAM_INT);
 
-      // vincular paràmetres per nom
-      // al parametre li vinculem el parametre rebut i li diem que l'id sera de tipus int
-      // i la resta string sera de tipus string
-      $stmt->bindParam(":id", $id, PDO::PARAM_INT);
-      $stmt->bindParam(":titulo", $titulo, PDO::PARAM_STR);
-      $stmt->bindParam(":imagen", $newImageName, PDO::PARAM_STR);
-      $stmt->bindParam(":texto", $texto, PDO::PARAM_STR);
-
-      // executo la query
-      if ($stmt->execute()) {
-        return true;
-      }
+    // executo la query
+    if ($stmt->execute()) {
+      return true;
     }
   }
 
-  // metode per ESBORRAR UN  ARTICLE
-  public function esborrar($idArticle)
+
+
+  // metode per ESBORRAR UN  USUARI
+  public function esborrar($idUsuari)
   {
     // creo la consulta
     $query = "DELETE FROM $this->table WHERE id = :id";
@@ -163,7 +143,7 @@ class Usuari_model
     // vincular paràmetres per nom
     // al parametre li vinculem el parametre rebut i li diem que la 
     // dada sera de tipus int
-    $stmt->bindParam(":id", $idArticle, PDO::PARAM_INT);
+    $stmt->bindParam(":id", $idUsuari, PDO::PARAM_INT);
 
     // executo la query
     if ($stmt->execute()) {

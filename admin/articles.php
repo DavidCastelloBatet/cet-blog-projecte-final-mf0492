@@ -12,6 +12,19 @@ $resultat = $articles->leer();
 
 ?>
 
+<!-- missatge d'ok -->
+<div class="row">
+    <div class="col-sm-12">
+        <?php if (isset($_GET['missatge'])) : ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong><?= $_GET['missatge']; ?></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
+<!-- final missatge d'ok -->
+
 
 <div class="row">
     <div class="col-sm-6">
