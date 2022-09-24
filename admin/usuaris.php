@@ -1,4 +1,15 @@
 <?php include("../includes/header.php") ?>
+<?php
+
+// instancio la base de dades i la conexio
+$baseDades = new Basemysql();
+$db = $baseDades->connect();
+
+// instancio l'objecte Usuari_model
+$usuaris = new Usuari_model($db);
+$resultat = $usuaris->leer();
+
+?>
 
 
 <div class="row">
@@ -21,16 +32,18 @@
             </thead>
             <tbody>
 
-                <tr>
-                    <td>4</td>
-                    <td>juan garcía</td>
-                    <td>juancgr@gmail.com</td>
-                    <td>Registrado</td>
-                    <td>2020-12-15</td>
-                    <td>
-                        <a href="editar_usuari.php" class="btn btn-warning"><i class="bi bi-pencil-fill"> Editar / Esborrar</i></a>
-                    </td>
-                </tr>
+                <?php foreach ($resultat as $usuari) : ?>
+                    <tr>
+                        <td><?= $usuari->usuario_id ?></td>
+                        <td><?= $usuari->usuario_nombre ?></td>
+                        <td><?= $usuari->usuario_email ?></td>
+                        <td><?= $usuari->rol ?></td>
+                        <td><?= $usuari->usuario_fecha_creacion ?></td>
+                        <td>
+                            <a href="editar_usuari.php?usuariId=<?= $usuari->usuario_id ?>" class="btn btn-warning"><i class="bi bi-pencil-fill"> Editar / Esborrar</i></a>
+                        </td>
+                    </tr>
+                <?php endforeach ?>
 
             </tbody>
         </table>
