@@ -90,4 +90,49 @@ class Article_model
       return true;
     }
   }
+
+
+
+  // metode per EDITAR UN ARTICLE 
+  public function actualizar($id, $titulo, $newImageName, $texto)
+  {
+    if ($newImageName == "") {
+      // Escenari si no es vol modificar la imatge
+      // creo la consulta
+      $query = "UPDATE  $this->table SET titulo = :titulo, texto = :texto WHERE id = :id";
+      // preparo la sentencia
+      $stmt = $this->conn->prepare($query);
+
+      // vincular paràmetres per nom
+      // al parametre li vinculem el parametre rebut i li diem que l'id sera de tipus int
+      // i la resta string sera de tipus string
+      $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+      $stmt->bindParam(":titulo", $titulo, PDO::PARAM_STR);
+      $stmt->bindParam(":texto", $texto, PDO::PARAM_STR);
+
+      // executo la query
+      if ($stmt->execute()) {
+        return true;
+      }
+    } else {
+      // Escenari si en el que SI es vol modificar la imatge
+      // creo la consulta
+      $query = "UPDATE  $this->table SET titulo = :titulo, imagen = :imagen, texto = :texto WHERE id = :id";
+      // preparo la sentencia
+      $stmt = $this->conn->prepare($query);
+
+      // vincular paràmetres per nom
+      // al parametre li vinculem el parametre rebut i li diem que l'id sera de tipus int
+      // i la resta string sera de tipus string
+      $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+      $stmt->bindParam(":titulo", $titulo, PDO::PARAM_STR);
+      $stmt->bindParam(":imagen", $newImageName, PDO::PARAM_STR);
+      $stmt->bindParam(":texto", $texto, PDO::PARAM_STR);
+
+      // executo la query
+      if ($stmt->execute()) {
+        return true;
+      }
+    }
+  }
 }
