@@ -52,11 +52,17 @@ class Usuari_model
 
 
 
-  // metode per LECTURA D'UN ARTICLE INDIVIDUAL
+  // metode per LECTURA D'UN USUARI INDIVIDUAL
   public function llegir_individual($id)
   {
     // creo la consulta
-    $query = "SELECT id, titulo, imagen, texto, fecha_creacion FROM $this->table WHERE id = ? LIMIT 0,1";
+    $query = "SELECT  u.id AS usuario_id,
+                      u.nombre AS usuario_nombre,
+                      u.email AS usuario_email,
+                      u.fecha_creacion AS usuario_fecha_creacion,
+                      r.nombre AS rol
+              FROM $this->table u INNER JOIN roles r ON r.id = u.rol_id 
+              WHERE u.id = ? LIMIT 0,1";
 
     // preparo la sentencia
     $stmt = $this->conn->prepare($query);
@@ -68,10 +74,10 @@ class Usuari_model
     $stmt->execute();
 
     // preparo el resultat de l'execute per retornar l'article en forma d'objecte
-    $article = $stmt->fetch(PDO::FETCH_OBJ);
+    $usuari = $stmt->fetch(PDO::FETCH_OBJ);
 
     // retorno l'objecte creat
-    return $article;
+    return $usuari;
   }
 
 

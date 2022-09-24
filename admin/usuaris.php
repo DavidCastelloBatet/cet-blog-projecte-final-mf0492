@@ -40,7 +40,7 @@ $resultat = $usuaris->leer();
                         <td><?= $usuari->rol ?></td>
                         <td><?= $usuari->usuario_fecha_creacion ?></td>
                         <td>
-                            <a href="editar_usuari.php?usuariId=<?= $usuari->usuario_id ?>" class="btn btn-warning"><i class="bi bi-pencil-fill"> Editar / Esborrar</i></a>
+                            <a href="editar_usuari.php?id=<?= $usuari->usuario_id ?>" class="btn btn-warning"><i class="bi bi-pencil-fill"> Editar / Esborrar</i></a>
                         </td>
                     </tr>
                 <?php endforeach ?>
