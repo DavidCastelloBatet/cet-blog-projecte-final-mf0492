@@ -1,5 +1,23 @@
 <?php include("includes/header_front.php") ?>
 
+<?php
+
+// instancio la base de dades i la conexio
+$baseDades = new Basemysql();
+$db = $baseDades->connect();
+
+// valido la recepcio de l'id 
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+}
+
+// instancio l'objecte Article_model
+$article = new Article_model($db);
+
+// crido el metode de l'objecte i li paso la id de l'article rebuda per GET
+$resultat = $article->llegir_individual($id);
+?>
+
 <div class="row">
 
 </div>
@@ -17,21 +35,21 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header text-center">
-                    <h1>Títol</h1>
+                    <h1><?= $resultat->titulo ?></h1>
                 </div>
                 <div class="card-body">
                     <div class="text-center">
-                        <img class="img-fluid img-thumbnail" src="img/articulos/img1.jpg">
+                        <img class="img-fluid img-thumbnail" width="600px" src="<?= RUTA_FRONT ?>img/articulos/<?= $resultat->imagen ?>">
                     </div>
 
-                    <p>texto prueba</p>
+                    <p><?= $resultat->texto ?></p>
 
                 </div>
             </div>
         </div>
     </div>
 
-
+    <!-- COMENTARIS - PENDENT D'IMPLEMENTAR
     <div class="row">
 
         <div class="col-sm-6 offset-3">
@@ -62,6 +80,6 @@
     <p>texto comentario demo</p>
 
 </div>
-
+-->
 </div>
 <?php include("includes/footer.php") ?>

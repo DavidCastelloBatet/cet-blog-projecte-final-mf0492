@@ -54,6 +54,7 @@ h2, h3, h4, h5, h6, p{
   bottom: 0;
   width: 100%;
   vertical-align: center;
+  height: 100px;
 }
 
 .my-footer > div{

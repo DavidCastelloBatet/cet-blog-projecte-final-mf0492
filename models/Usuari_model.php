@@ -121,9 +121,8 @@ class Usuari_model
     // preparo la sentencia
     $stmt = $this->conn->prepare($query);
 
-    // vinculo parametres per nom
+    // vinculo parametres per nom amb tipat string
     $stmt->bindParam(":email", $email, PDO::PARAM_STR);
-
 
     // executo la query
     $stmt->execute();
@@ -135,6 +134,38 @@ class Usuari_model
       return false;
     } else {
       return true;
+    }
+  }
+
+
+  // metode per ACCEDIR
+  public function accedir($email, $password)
+  {
+
+    // creo la consulta
+    $query = "SELECT * FROM $this->table 
+              WHERE email = :email AND password = :password";
+
+    //encriptar passwor md5
+    $passwordEncriptado = md5($password);
+
+    // preparo la sentencia
+    $stmt = $this->conn->prepare($query);
+
+    // vinculo parametres per nom amb tipat string
+    $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+    $stmt->bindParam(":password", $passwordEncriptado, PDO::PARAM_STR);
+
+    // executo la query
+    $stmt->execute();
+
+    //obtenim registre
+    $existeUsuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($existeUsuario) {
+      return true;
+    } else {
+      return false;
     }
   }
 

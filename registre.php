@@ -5,6 +5,9 @@
 $baseDades = new Basemysql();
 $db = $baseDades->connect();
 
+// instanciem l'objecte usuari
+$usuari = new Usuari_model($db);
+
 // CRUD - CREACIO / REGISTRE D'USUARI
 
 if (isset($_POST['registrarse'])) {
@@ -23,8 +26,6 @@ if (isset($_POST['registrarse'])) {
         if ($password != $confirmarPassword) {
             $error = "Error, el passwords i la confirmació no coincideixen";
         } else {
-            // instanciem l'objecte usuari
-            $usuari = new Usuari_model($db);
 
             if ($usuari->validar_email($email)) {
                 // Creem l'usuari registrat
@@ -56,7 +57,7 @@ if (isset($_POST['registrarse'])) {
 <!-- final missatge d'error -->
 
 
-<!-- missatge d'error -->
+<!-- missatge d'OK -->
 <div class="row">
     <div class="col-sm-12">
         <?php if (isset($missatge)) : ?>
@@ -67,7 +68,7 @@ if (isset($_POST['registrarse'])) {
         <?php endif; ?>
     </div>
 </div>
-<!-- final missatge d'error -->
+<!-- final missatge d'OK -->
 
 <div class="container-fluid">
     <h1 class="text-center">Registre d'Usuaris</h1>
