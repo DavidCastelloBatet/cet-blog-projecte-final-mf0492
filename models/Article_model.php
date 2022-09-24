@@ -105,7 +105,7 @@ class Article_model
 
       // vincular paràmetres per nom
       // al parametre li vinculem el parametre rebut i li diem que l'id sera de tipus int
-      // i la resta string sera de tipus string
+      // i la resta de camps seran de tipus string
       $stmt->bindParam(":id", $id, PDO::PARAM_INT);
       $stmt->bindParam(":titulo", $titulo, PDO::PARAM_STR);
       $stmt->bindParam(":texto", $texto, PDO::PARAM_STR);
@@ -115,7 +115,7 @@ class Article_model
         return true;
       }
     } else {
-      // Escenari si en el que SI es vol modificar la imatge
+      // Escenari  en el que SI es vol modificar la imatge
       // creo la consulta
       $query = "UPDATE  $this->table SET titulo = :titulo, imagen = :imagen, texto = :texto WHERE id = :id";
       // preparo la sentencia
@@ -133,6 +133,26 @@ class Article_model
       if ($stmt->execute()) {
         return true;
       }
+    }
+  }
+
+  // metode per ESBORRAR UN  ARTICLE
+  public function esborrar($idArticle)
+  {
+    // creo la consulta
+    $query = "DELETE FROM $this->table WHERE id = :id";
+
+    // preparo la sentencia
+    $stmt = $this->conn->prepare($query);
+
+    // vincular paràmetres per nom
+    // al parametre li vinculem el parametre rebut i li diem que la 
+    // dada sera de tipus int
+    $stmt->bindParam(":id", $idArticle, PDO::PARAM_INT);
+
+    // executo la query
+    if ($stmt->execute()) {
+      return true;
     }
   }
 }

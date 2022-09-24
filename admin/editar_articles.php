@@ -17,7 +17,7 @@ $article = new Article_model($db);
 $resultat = $article->llegir_individual($id);
 
 
-// actualitzacio de l'article
+// CRUD - ACTUALITZAR L'ARTICLE
 if (isset($_POST['editarArticulo'])) {
     // recullo el valor de l'id que ve del input ocult del formulari
     $idArticle = $_POST['id'];
@@ -81,6 +81,22 @@ if (isset($_POST['editarArticulo'])) {
                 $error = "Error, no s'ha pogut actualitzar";
             }
         }
+    }
+}
+
+// CRUD - ESBORRAT DE L'ARTICLE
+if (isset($_POST['borrarArticulo'])) {
+    // instancio l'objecte article
+    $article = new Article_model($db);
+    // recullo el valor de l'id que ve del input ocult del formulari
+    $idArticle = $_POST['id'];
+
+    // creem el nou article i redireccionem
+    if ($article->esborrar($idArticle)) {
+        $missatge = "Article esborrat correctament";
+        header("Location:articles.php?missatge=" . urlencode($missatge));
+    } else {
+        $error = "Error, no s'ha pogut esborrar";
     }
 }
 

@@ -6,6 +6,8 @@
 $baseDades = new Basemysql();
 $db = $baseDades->connect();
 
+// CRUD - CREACIO DE L'ARTICLE
+
 // valido la recepcio de valors del formulari que arriva de crear_article.php
 // quan s'apreta el boto amb el name = "crearArticulo" pasa el següent:
 
