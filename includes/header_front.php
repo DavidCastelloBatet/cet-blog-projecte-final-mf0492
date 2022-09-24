@@ -45,9 +45,11 @@
               <li>
                 <a class="dropdown-item" href="<?= RUTA_ADMIN; ?>articles.php">Articles</a>
               </li>
-              <li>
+              <!-- PENDENT D'IMPLEMENTAR COMENTARIS-->
+              <!--
+              <li class="ocultarComentaris">
                 <a class="dropdown-item" href="<?= RUTA_ADMIN; ?>comentaris.php">Comentaris</a>
-              </li>
+              </li>-->
             </ul>
           </li>
           <li class="nav-item">

@@ -83,12 +83,15 @@ class Usuari_model
 
 
 
-  // metode per CREAR UN NOU ARTICLE
-  public function crear($titulo, $newImageName, $texto)
+  // metode per CREAR USUARI / REGISTRAR-SE
+  public function registrar($nombre, $email, $password)
   {
     // creo la consulta
-    $query = "INSERT INTO  $this->table (titulo, imagen, texto) VALUES (:titulo, :imagen, :texto)";
-    // $query = 'INSERT INTO ' . $this->table . ' (titulo, imagen, texto) VALUES(:titulo, :imagen, :texto)';
+    $query = "INSERT INTO  $this->table (nombre, email, password, rol_id) VALUES (:nombre, :email, :password, 2)";
+
+    //encriptar passwor md5
+    $passwordEncriptado = md5($password);
+
 
     // preparo la sentencia
     $stmt = $this->conn->prepare($query);
@@ -96,12 +99,41 @@ class Usuari_model
     // vincular paràmetres per nom
     // al parametre li vinculem el parametre rebut i li diem que la 
     // dada sera de tipus string
-    $stmt->bindParam(":titulo", $titulo, PDO::PARAM_STR);
-    $stmt->bindParam(":imagen", $newImageName, PDO::PARAM_STR);
-    $stmt->bindParam(":texto", $texto, PDO::PARAM_STR);
+    $stmt->bindParam(":nombre", $nombre, PDO::PARAM_STR);
+    $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+    $stmt->bindParam(":password", $passwordEncriptado, PDO::PARAM_STR);
 
     // executo la query
     if ($stmt->execute()) {
+      return true;
+    }
+  }
+
+
+
+  // metode per validar si L'USUARI / EMAIL EXISTEIX
+  public function validar_email($email)
+  {
+
+    // creo la consulta
+    $query = "SELECT * FROM $this->table WHERE email = :email";
+
+    // preparo la sentencia
+    $stmt = $this->conn->prepare($query);
+
+    // vinculo parametres per nom
+    $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+
+
+    // executo la query
+    $stmt->execute();
+
+    //obtenim registre
+    $registroEmail = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($registroEmail) {
+      return false;
+    } else {
       return true;
     }
   }
