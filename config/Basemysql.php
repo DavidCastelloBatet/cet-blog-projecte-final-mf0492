@@ -16,7 +16,8 @@ class Basemysql
     $this->conn = null;
 
     try {
-      // creo objecte conn (conexio). li paso com a paremetres, tipus bbdd, nom bbdd, usuari i password. Preparo catch possibles errors
+      // creo objecte conn (conexio). li paso com a paremetres, tipus bbdd, nom bbdd, usuari i password. 
+      // Preparo catch possibles errors
       $this->conn = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->db_name, $this->username, $this->password);
       $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {

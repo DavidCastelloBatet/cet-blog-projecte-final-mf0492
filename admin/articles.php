@@ -46,6 +46,7 @@ $resultat = $articles->leer();
                         <td><?= $article->texto ?></td>
                         <td><?= $article->fecha_creacion ?></td>
                         <td>
+                            <!-- quan es clica, es pasa la id de l'article -->
                             <a href="editar_articles.php?id=<?= $article->id; ?>" class="btn btn-warning"><i class="bi bi-pencil-fill"> Editar / Esborrar</i></a>
                         </td>
                     </tr>
