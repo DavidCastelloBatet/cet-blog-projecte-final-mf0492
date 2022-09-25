@@ -21,8 +21,8 @@ $resultat = $articles->leer();
                         <img height="300px" src="<?= RUTA_FRONT ?>img/articulos/<?= $article->imagen ?>" class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title"><?= $article->titulo ?></h5>
-                            <p><strong><?= $article->fecha_creacion ?></strong></p>
-                            <p class="card-text"><?= $article->texto ?></p>
+                            <p><strong><?= formatData($article->fecha_creacion) ?></strong></p>
+                            <p class="card-text"><?= textCurt($article->texto) ?></p>
                             <a href="detall.php?id=<?= $article->id ?>" class="btn btn-primary">Veure mes</a>
                         </div>
                     </div>

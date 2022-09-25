@@ -2,7 +2,7 @@
 
 
 <?php
-session_start();
+
 // instancio la base de dades i la conexio
 $baseDades = new Basemysql();
 $db = $baseDades->connect();

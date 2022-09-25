@@ -4,7 +4,9 @@
 <?php include './models/Article_model.php' ?>
 <?php include './models/Comentari_model.php' ?>
 <?php include './models/Usuari_model.php' ?>
-
+<?php
+session_start();
+?>
 
 <!doctype html>
 <html lang="ca">
@@ -37,41 +39,54 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Administració
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li>
-                <a class="dropdown-item" href="<?= RUTA_ADMIN; ?>articles.php">Articles</a>
-              </li>
-              <!-- PENDENT D'IMPLEMENTAR COMENTARIS-->
-              <!--
+          <?php if (isset($_SESSION['autenticat'])) : ?>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Administració
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <a class="dropdown-item" href="<?= RUTA_ADMIN; ?>articles.php">Articles</a>
+                </li>
+                <!-- PENDENT D'IMPLEMENTAR COMENTARIS-->
+                <!--
               <li class="ocultarComentaris">
                 <a class="dropdown-item" href="<?= RUTA_ADMIN; ?>comentaris.php">Comentaris</a>
               </li>-->
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?= RUTA_ADMIN; ?>usuaris.php">Usuaris</a>
-          </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?= RUTA_ADMIN; ?>usuaris.php">Usuaris</a>
+            </li>
+          <?php endif; ?>
         </ul>
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link" href="<?= RUTA_FRONT; ?>">Inici</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?= RUTA_FRONT; ?>registre.php">Registrar-se</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?= RUTA_FRONT; ?>accedir.php">Accedir</a>
-          </li>
-          <li class="nav-item">
-            <p class="text-white mt-2"><i class="bi bi-person-circle"></i> </p>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?= RUTA_FRONT; ?>sortir.php">Sortir</a>
-          </li>
+          <?php if (!isset($_SESSION['autenticat'])) : ?>
+
+            <li class="nav-item">
+              <a class="nav-link" href="<?= RUTA_FRONT; ?>registre.php">Registrar-se</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?= RUTA_FRONT; ?>accedir.php">Accedir</a>
+            </li>
+
+          <?php endif; ?>
+
+          <?php if (isset($_SESSION['autenticat'])) : ?>
+
+            <li class="nav-item">
+              <p class="text-white mt-2"><i class="bi bi-person-circle"></i>
+                <?= $_SESSION['email']; ?>
+              </p>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="<?= RUTA_FRONT; ?>sortir.php">Sortir</a>
+            </li>
+          <?php endif; ?>
         </ul>
       </div>
     </div>
