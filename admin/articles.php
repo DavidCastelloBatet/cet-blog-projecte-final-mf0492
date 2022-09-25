@@ -56,7 +56,7 @@ $resultat = $articles->leer();
                         <td>
                             <img class="img-fluid" src="<?= RUTA_FRONT . 'img/articulos/' . $article->imagen; ?>" style="width:180px;">
                         </td>
-                        <td><?= $article->texto ?></td>
+                        <td><?= textCurt($article->texto, 200) ?></td>
                         <td><?= $article->fecha_creacion ?></td>
                         <td>
                             <!-- quan es clica, es pasa la id de l'article -->

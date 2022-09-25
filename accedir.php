@@ -22,6 +22,8 @@ if (isset($_POST['acceder'])) {
         if ($usuari->accedir($email, $password)) {
             $_SESSION['autenticat'] = true;
             $_SESSION['email'] = $email;
+            // Accesos per rol pendent de resoldre
+            //$_SESSION['autoritzatAdministrador'] = $usuari->rol_id;
 
             echo ("<script>location.href = '" . RUTA_FRONT . "'</script>");
         } else {

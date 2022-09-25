@@ -22,7 +22,7 @@ $resultat = $articles->leer();
                         <div class="card-body">
                             <h5 class="card-title"><?= $article->titulo ?></h5>
                             <p><strong><?= formatData($article->fecha_creacion) ?></strong></p>
-                            <p class="card-text"><?= textCurt($article->texto) ?></p>
+                            <p class="card-text"><?= textCurt($article->texto, 80) ?></p>
                             <a href="detall.php?id=<?= $article->id ?>" class="btn btn-primary">Veure mes</a>
                         </div>
                     </div>

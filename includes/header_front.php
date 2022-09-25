@@ -58,6 +58,7 @@ session_start();
             <li class="nav-item">
               <a class="nav-link" href="<?= RUTA_ADMIN; ?>usuaris.php">Usuaris</a>
             </li>
+
           <?php endif; ?>
         </ul>
         <ul class="navbar-nav mb-2 mb-lg-0">

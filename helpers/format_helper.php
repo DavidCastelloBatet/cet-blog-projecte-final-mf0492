@@ -7,11 +7,11 @@ function formatData($data)
 }
 
 // retallar text a fitxa article pagina d'inici
-function textCurt($text)
+function textCurt($text, $caracters)
 {
   $text = $text . "";
-  $text = substr($text, 0, 80);
+  $text = substr($text, 0, $caracters);
   $text = substr($text, 0, strrpos($text, ' '));
-  $text = $text . "...";
+  $text = $text . "......";
   return $text;
 }
