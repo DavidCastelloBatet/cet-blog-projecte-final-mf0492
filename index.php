@@ -29,10 +29,7 @@ $resultat = $articles->leer();
                 </article>
             </div>
         <?php endforeach ?>
-
-
-
-
     </div>
 </div>
+
 <?php include("includes/footer.php") ?>
