@@ -43,6 +43,7 @@ if (!$_SESSION['autenticat']) {
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
                     <?php if (isset($_SESSION['autenticat'])) : ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -53,7 +54,6 @@ if (!$_SESSION['autenticat']) {
                                     <a class="dropdown-item" href="<?= RUTA_ADMIN; ?>articles.php">Articles</a>
                                 </li>
                                 <!-- PENDENT D'IMPLEMENTAR COMENTARIS-->
-
                                 <!--
                             <li class="ocultarComentaris">
                                 <a class="dropdown-item" href="<?= RUTA_ADMIN; ?>comentaris.php">Comentaris</a>
@@ -64,30 +64,28 @@ if (!$_SESSION['autenticat']) {
                             <a class="nav-link" href="<?= RUTA_ADMIN; ?>usuaris.php">Usuaris</a>
                         </li>
                     <?php endif; ?>
+
                 </ul>
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="<?= RUTA_FRONT; ?>">Inici</a>
                     </li>
-                    <?php if (!isset($_SESSION['autenticat'])) : ?>
 
+                    <?php if (!isset($_SESSION['autenticat'])) : ?>
                         <li class="nav-item">
                             <a class="nav-link" href="<?= RUTA_FRONT; ?>registre.php">Registrar-se</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?= RUTA_FRONT; ?>accedir.php">Accedir</a>
                         </li>
-
                     <?php endif; ?>
 
                     <?php if (isset($_SESSION['autenticat'])) : ?>
-
                         <li class="nav-item">
                             <p class="text-white mt-2"><i class="bi bi-person-circle"></i>
                                 <?= $_SESSION['email']; ?>
                             </p>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link" href="<?= RUTA_FRONT; ?>sortir.php">Sortir</a>
                         </li>

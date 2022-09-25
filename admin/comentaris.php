@@ -1,3 +1,5 @@
+<!-- PENDENT D'IMPLEMENTAR!!!!!-->
+
 <?php include("../includes/header.php") ?>
 
 <div class="row">
